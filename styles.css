@@ -1,0 +1,30 @@
+body{
+    background-image: url(question-mark.jpg);
+    background-repeat: no-repeat;
+    font-family: Tahoma, sans-serif;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.game {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    margin: 5% 5%;
+    position: relative;
+}
+
+.question {
+    -webkit-box-shadow: 5px 5px 15px 5px #000000; 
+    box-shadow: 5px 5px 15px 5px #000000;
+    border: 3px solid #000000;
+    background-color: #00FFFF;
+    width: 400px;
+    height: 80px;
+    margin: 100px 500px 0 0;
+}
+
+.options{
+    display: grid;
+}
