@@ -66,6 +66,13 @@ function setQuestion(){//changes the question
     checkChoice(choices[4]); //choices[4] is the letter that corresponds to the correct option
 }
 
-function checkChoice(correctAnswer){
-    
+function checkChoice(correctAnswer, selectedAnswer){
+    return correctAnswer == selectedAnswer;
+}
+
+function getSelectedAnswer(choice){
+    if(choice == 'first') return 'A';
+    if(choice == 'second') return 'B';
+    if(choice == 'third') return 'C';
+    if(choice == 'forth') return 'D';
 }
