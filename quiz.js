@@ -71,8 +71,10 @@ function checkChoice(correctAnswer, selectedAnswer){
 }
 
 function getSelectedAnswer(choice){
-    if(choice == 'first') return 'A';
-    if(choice == 'second') return 'B';
-    if(choice == 'third') return 'C';
-    if(choice == 'forth') return 'D';
+    do{
+        if(choice == 'first') return 'A';
+        if(choice == 'second') return 'B';
+        if(choice == 'third') return 'C';
+        if(choice == 'forth') return 'D';
+    }while(choice == null);
 }
