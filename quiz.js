@@ -1,80 +1,147 @@
-var questions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+var questions = [
+  new Question(
+    "What is the capital of Portugal?",
+    ["Lisbon", "Porto", "Coimbra", "Braga"],
+    "A"
+  ),
+  new Question(
+    "What is the largest bone in the human body?",
+    ["Femur", "Tibia", "Humerus", "Clavicle"],
+    "A"
+  ),
+  new Question(
+    "What is the name of the author of Don Quixote?",
+    [
+      "Miguel de Cervantes",
+      "Gabriel García Márquez",
+      "Jorge Luis Borges",
+      "Mario Vargas Llosa",
+    ],
+    "A"
+  ),
+  new Question(
+    "What is the name of the largest ocean in the world?",
+    ["Pacific", "Atlantic", "Indian", "Arctic"],
+    "A"
+  ),
+  new Question(
+    "What is the name of the official currency of the European Union?",
+    ["Euro", "Pound", "Franc", "Mark"],
+    "A"
+  ),
+  new Question(
+    "What is the name of the inventor of the electric light bulb?",
+    ["Thomas Edison", "Nikola Tesla", "Alexander Graham Bell", "Isaac Newton"],
+    "A"
+  ),
+  new Question(
+    "What is the name of the largest planet in the solar system?",
+    ["Jupiter", "Saturn", "Uranus", "Neptune"],
+    "A"
+  ),
+  new Question(
+    "What is the name of the painter who cut off his own ear?",
+    ["Vincent van Gogh", "Pablo Picasso", "Salvador Dalí", "Claude Monet"],
+    "A"
+  ),
+  new Question(
+    "What is the name of the current queen of the United Kingdom?",
+    ["Elizabeth II", "Victoria I", "Mary I", "Anne I"],
+    "A"
+  ),
+  new Question(
+    "What is the name of the sport that uses cues and colored balls on a green table?",
+    ["Snooker", "Billiards", "Golf", "Hockey"],
+    "A"
+  ),
+];
 var score = 0;
+var usedQuestions = [];
+var index;
+var questionCount = 0;
 
-while(questions.length > 0){
-    setQuestion();
+function randomQuestionSelector(questions) {
+  //selects a random number, which corresponds to a specific question
+  var questionNumber = Math.floor(Math.random() * questions.length);
+
+  while (usedQuestions.includes(questionNumber)) {
+    questionNumber = Math.floor(Math.random() * questions.length);
+  }
+
+  usedQuestions.push(questionNumber);
+  return questionNumber;
 }
 
+function setQuestion() {
+  //changes the question
+  const questionDiv = document.getElementsByClassName("question")[0];
+  const firstChoice = document.getElementById("first");
+  const secondChoice = document.getElementById("second");
+  const thirdChoice = document.getElementById("third");
+  const forthChoice = document.getElementById("fourth");
 
+  index = randomQuestionSelector(questions);
 
-function randomQuestionSelector(questions){ //selects a random number, which corresponds to a specific question
-    var questionNumber = questions[Math.floor(Math.random() * questions.length)];
-    questions.splice(questions.indexOf(questionNumber), 1);
+  const question = questions[index];
+  const questionText = question.getText();
+  const choices = question.getOptions();
+  const correctAnswer = question.getAnswer();
 
-    return questionNumber;
+  questionDiv.textContent = questionText;
+
+  firstChoice.textContent = choices[0];
+  secondChoice.textContent = choices[1];
+  thirdChoice.textContent = choices[2];
+  forthChoice.textContent = choices[3];
+
+  questionCount++;
 }
 
-function getQuestionAndOptions(){
-    return questionValue(randomQuestionSelector(questions));
+function checkChoice(correctAnswer, selectedAnswer) {
+  return correctAnswer == selectedAnswer;
 }
 
-function questionValue(question){ //get the question
-    switch (selectedQuestion) {
-        case 0:
-            return ["What's the true name of The Rock?", "Dwayne Johnson", "Eric Bishof", "Dalai Lama", "Barack Obama", "A"];
-        case 1:
-            return "What's the tallest building in the World?"
-        case 2:
-            return "blablabla"
-        case 3:
-            return "blablabla"
-        case 4:
-            return "blablabla"
-        case 5:
-            return "blablabla"
-        case 6:
-            return "blablabla"
-        case 7:
-            return "blablabla"
-        case 8:
-            return "blablabla"
-        case 9:
-            return "blablabla"   
-        default:
-            break;
+function getSelectedAnswer() {
+  var buttons = document.getElementsByClassName("choice");
+  for (var i = 0; i < buttons.length; i++) {
+    var button = buttons[i];
+    if (button.checked) {
+      return button.value;
     }
+  }
 }
 
-function setQuestion(){//changes the question
-    const questionDiv = document.getElementsByClassName("question");
-    const firstChoice = document.getElementById("first");
-    const secondChoice = document.getElementById("second");
-    const thirdChoice = document.getElementById("third");
-    const forthChoice = document.getElementById("forth");
+function resetQuiz() {
+  score = 0;
+  usedQuestions = [];
+  questionCount = 0;
 
-    const aux = getQuestionAndOptions();
-    const question = aux[0];
-    const choices = aux.splice(0, 1);
-
-    questionDiv.textContent = question;
-    
-    firstChoice.textContent = choices[0];
-    secondChoice.textContent = choices[1];
-    thirdChoice.textContent = choices[2];
-    forthChoice.textContent = choices[3];
-
-    checkChoice(choices[4]); //choices[4] is the letter that corresponds to the correct option
+  var buttons = document.getElementsByClassName("choice");
+  for(var i = 0; i < buttons.length; i++){
+    var button = buttons[i];
+    button.checked = false;
+  }
 }
 
-function checkChoice(correctAnswer, selectedAnswer){
-    return correctAnswer == selectedAnswer;
-}
+document.getElementById("start").addEventListener("click", function () {
+  setQuestion();
+});
 
-function getSelectedAnswer(choice){
-    do{
-        if(choice == 'first') return 'A';
-        if(choice == 'second') return 'B';
-        if(choice == 'third') return 'C';
-        if(choice == 'forth') return 'D';
-    }while(choice == null);
-}
+document.getElementById("next").addEventListener("click", function () {
+  var selectedAnswer = getSelectedAnswer();
+  var question = questions[index];
+  if (question.checkAnswer(selectedAnswer)) {
+    score++;
+  }
+
+  if (questionCount < questions.length) {
+    setQuestion();
+  } else {
+    alert("You finished the quiz! Score: " + score);
+  }
+});
+
+document.getElementById("start").addEventListener("click", function () {
+  resetQuiz();
+  setQuestion();
+})

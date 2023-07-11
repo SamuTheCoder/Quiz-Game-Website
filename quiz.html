@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
-    <script src="quiz.js"></script>
     <title>Quiz Game</title>
   </head>
   <body>
@@ -20,36 +19,19 @@
           <button id="next" class="next-btn">Next</button>
         </div>
         <div class="options">
-          <button
-            class="choice"
-            id="first"
-            onclick="getSelectedAnswer('first')"
-          >
-            A.
-          </button>
-          <button
-            class="choice"
-            id="second"
-            onclick="getSelectedAnswer('second')"
-          >
-            B.
-          </button>
-          <button
-            class="choice"
-            id="third"
-            onclick="getSelectedAnswer('third')"
-          >
-            C.
-          </button>
-          <button
-            class="choice"
-            id="forth"
-            onclick="getSelectedAnswer('forth')"
-          >
-            D.
-          </button>
+          <input type="radio" id="first" name="choice" value="A" />
+          <label for="first">A.</label>
+          <input type="radio" id="second" name="choice" value="B" />
+          <label for="second">B.</label>
+          <input type="radio" id="third" name="choice" value="C" />
+          <label for="third">C.</label>
+          <input type="radio" id="fourth" name="choice" value="D" />
+          <label for="fourth">D.</label>
         </div>
       </div>
     </div>
+
+    <script src="question.js"></script>
+    <script src="quiz.js"></script>
   </body>
 </html>
