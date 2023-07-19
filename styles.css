@@ -6,6 +6,8 @@ body{
     background-attachment: fixed;
     background-position: center;
     overflow-y: hidden;
+    margin: 0;
+    padding: 0;
 }
 
 .game {
@@ -18,52 +20,60 @@ body{
     padding: 50px;
     height: 160px;
     display: flex;
-    flex-direction: row;
-    position: relative;
+    flex-direction: column;
     align-items: center;
 }
 
 .question {
-    -webkit-box-shadow: 5px 5px 15px 5px #000000; 
     box-shadow: 5px 5px 15px 5px #000000;
     border: 3px solid #000000;
     background-color: #00FFFF;
-    width: 750px;
-    height: 150px;
+    width: 100%;
+    max-width: 750px;
     margin-bottom: 75px;
     border-radius: 25px;
     font-size: large;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
+    padding: 20px;
+    text-align: center;
 }
 
 .options{
     display: flex;
     flex-direction: column;
-    margin-left: 400px;
+    align-items:start;
     padding: 10px;
+    margin-top: 20px;
+    max-height: 200px;
 }
 
 input[type="radio"] {
     appearance: none;
+    
 }
 
 label {
-    -webkit-box-shadow: 5px 5px 15px #000000;
-    box-shadow: 5px 5px 15px 5px #000000;
+    box-shadow: 5px 5px 15px #000000;
     border-radius: 25px;
     border: none;
     background-color: orange;
     margin-bottom: 10px;
-    width:500px;
-    height: 80px;
+    width: 100%;
+    max-width:500px;
+    height: 50px;
+    display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     color: black;
     border-radius: 25px;
-    font-size: x-large;
-    transition: 0.75s;
+    font-size: large;
+    transition: 0.3s;
+    cursor: pointer;
+    padding: 10px;
 }
 
 label:hover{
@@ -72,6 +82,7 @@ label:hover{
 
 input[type="radio"]:focus + label{
     outline: none;
+    float: right;
 }
 
 input[type="radio"]::before{
@@ -82,10 +93,12 @@ input[type="radio"]::before{
     border-radius: 50%;
     border: none;
     margin-right: 10px;
+    float: right;
 }
 
 input[type="radio"]:checked::before{
     background-color: black;
+    float: right;
 }
 
 .options button:hover{
@@ -96,15 +109,14 @@ input[type="radio"]:checked::before{
 .controls-options {
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    position: relative;
-    height:auto;
-    padding-top: 50px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
 }
 .controls {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     transition: 0.75s;
 }
 
@@ -113,29 +125,29 @@ input[type="radio"]:checked::before{
 }
 
 .start-btn,.next-btn {
-    -webkit-box-shadow: 5px 5px 15px 5px #000000; 
-    box-shadow: 5px 5px 15px 5px #000000;
+    box-shadow: 5px 5px 15px 5px #000000; 
     border: 3px solid black;
     border-radius: 25px;
     width: 150px;
     height: 50px;
     background-color: white;
     font-size: x-large;
+    cursor: pointer;
 
 }
 
 .score {
-    -webkit-box-shadow: 5px 5px 15px 5px #000000; 
     box-shadow: 5px 5px 15px 5px #000000;
     border: 3px solid black;
     background-color:  gold;
     width:auto;
     height: auto;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: 10px;
     border-radius: 50%;
     font-size: large;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 10px
 }

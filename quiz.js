@@ -59,6 +59,10 @@ var score = 0;
 var usedQuestions = [];
 var index;
 var questionCount = 0;
+radios = document.getElementsByTagName("input");
+for (var i = 0; i < radios.length; i++) {
+  radios[i].checked = false;
+}
 
 function randomQuestionSelector(questions) {
   //selects a random number, which corresponds to a specific question
@@ -116,10 +120,9 @@ function resetQuiz() {
   usedQuestions = [];
   questionCount = 0;
 
-  var buttons = document.getElementsByClassName("choice");
-  for(var i = 0; i < buttons.length; i++){
-    var button = buttons[i];
-    button.checked = false;
+  radios = document.getElementsByTagName("input");
+  for (var i = 0; i < radios.length; i++) {
+    radios[i].checked = false;
   }
 }
 
@@ -137,11 +140,15 @@ document.getElementById("next").addEventListener("click", function () {
   if (questionCount < questions.length) {
     setQuestion();
   } else {
-    alert("You finished the quiz! Score: " + score);
+    setTimeout(function () {
+      alert("You finished the quiz! Score: " + score);
+      resetQuiz();
+      setQuestion();
+    }, 100);
   }
 });
 
 document.getElementById("start").addEventListener("click", function () {
   resetQuiz();
   setQuestion();
-})
+});
